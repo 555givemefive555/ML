@@ -28,7 +28,6 @@ class LinearRegression:
             
             self.w = np.zeros(len(X[0]))
             self.b = 0.0
-            loss = self.loss_history
             
             for i in range(self.n_iters):
                 
@@ -39,10 +38,9 @@ class LinearRegression:
                 grad_b = (2 / len(X)) * error.sum()
                 self.w -= self.lr * grad_w
                 self.b -= self.lr * grad_b
-                if len(loss) > 1:
-                    if abs(loss[-1] - loss[-2]) < 1e-6:
+                if len(self.loss_history) > 1:
+                    if abs(self.loss_history[-1] - self.loss_history[-2]) < 1e-6:
                         break
-            self.loss_history = np.asarray(loss)
         
         
         return self
